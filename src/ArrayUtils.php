@@ -6,7 +6,7 @@ class ArrayUtils
 {
 
     /**
-     * 提供一个数组把数组内的数组内容转为JSON
+     * 提供一个数组把数组内的数组和对象内容转为JSON
      * @param $array
      * @return mixed
      */
@@ -14,7 +14,7 @@ class ArrayUtils
     {
         foreach ($array as $key => $value) {
             // 检查当前值是否是数组
-            if (is_array($value)) {
+            if (is_array($value) or is_object($value)) {
                 // 将数组字段转换为 JSON
                 $array[$key] = json_encode($value, JSON_UNESCAPED_UNICODE);
             }
