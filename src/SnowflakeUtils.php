@@ -4,7 +4,6 @@ namespace Faj1\Utils;
 
 use Godruoyi\Snowflake\RedisSequenceResolver;
 use Godruoyi\Snowflake\Snowflake;
-use Redis;
 
 /**
  * 雪花ID工具

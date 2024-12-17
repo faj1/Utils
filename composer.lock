@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "941559725b058a919a111472af6aefa1",
+    "content-hash": "82fa47b28bc4be6787873c3b14ea281a",
     "packages": [
         {
             "name": "godruoyi/php-snowflake",
@@ -1824,13 +1824,14 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {},
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
         "ext-json": "*",
-        "ext-zlib": "*"
+        "ext-zlib": "*",
+        "ext-redis": "*"
     },
-    "platform-dev": [],
+    "platform-dev": {},
     "plugin-api-version": "2.6.0"
 }
