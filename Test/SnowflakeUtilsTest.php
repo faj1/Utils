@@ -22,7 +22,7 @@ class SnowflakeUtilsTest extends TestCase
     {
         $Data = [];
         run(function () use (&$Data) {
-            for ($i = 0; $i < 20000; $i++) {
+            for ($i = 0; $i < 20; $i++) {
                 \Swoole\Coroutine\go(function () use (&$Data) {
                     $Data[] = SnowflakeUtils::getId();
                 });

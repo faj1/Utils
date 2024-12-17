@@ -25,8 +25,9 @@ class SnowflakeUtils
         }
 
         $snowflake->setSequenceResolver(new RedisSequenceResolver($redis));
+        $id = $snowflake->id();
+        $redis->close();
         return $snowflake->id();
-
     }
 
 
