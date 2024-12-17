@@ -7,6 +7,14 @@ namespace Composer\Autoload;
 class ComposerStaticInitfa2d5f0e5aab4398021489a0d34c7ed5
 {
     public static $prefixLengthsPsr4 = array (
+        'P' => 
+        array (
+            'Predis\\' => 7,
+        ),
+        'G' => 
+        array (
+            'Godruoyi\\Snowflake\\' => 19,
+        ),
         'F' => 
         array (
             'Faj1\\Utils\\' => 11,
@@ -14,6 +22,14 @@ class ComposerStaticInitfa2d5f0e5aab4398021489a0d34c7ed5
     );
 
     public static $prefixDirsPsr4 = array (
+        'Predis\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/predis/predis/src',
+        ),
+        'Godruoyi\\Snowflake\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/godruoyi/php-snowflake/src',
+        ),
         'Faj1\\Utils\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',

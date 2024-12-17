@@ -6,5 +6,7 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Predis\\' => array($vendorDir . '/predis/predis/src'),
+    'Godruoyi\\Snowflake\\' => array($vendorDir . '/godruoyi/php-snowflake/src'),
     'Faj1\\Utils\\' => array($baseDir . '/src'),
 );
