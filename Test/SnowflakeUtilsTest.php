@@ -43,7 +43,7 @@ class SnowflakeUtilsTest extends TestCase
     public function testSocket(){
 
         run(function () use (&$UnixClient) {
-            for ($i = 0; $i < 1; $i++) {
+            for ($i = 0; $i < 10; $i++) {
                 go(function () {
                     $UnixClient = new UnixClient();
                     $UnixClient->send('/tmp/telegram_31bc5e609e3144f7f6556e015133c999e4fe00e4439283d69b23a2634a127df8.sock',['method'=>'TcpSendMessage','params'=>['peer'=>'@bifa03','message'=>'HH1111111111111111HH']]);

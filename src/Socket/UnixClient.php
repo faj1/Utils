@@ -34,6 +34,7 @@ class UnixClient
         echo 'response:'.json_encode($response)."\n";
         // 关闭连接
         fclose($client);
+        return $response;
     }
 
 
