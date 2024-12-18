@@ -7,11 +7,22 @@ namespace Composer\Autoload;
 class ComposerStaticInitfa2d5f0e5aab4398021489a0d34c7ed5
 {
     public static $files = array (
+        'ad155f8f1cf0d418fe49e248db8c661b' => __DIR__ . '/..' . '/react/promise/src/functions_include.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         'ec07570ca5a812141189b1fa81503674' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert/Functions.php',
     );
 
     public static $prefixLengthsPsr4 = array (
+        'R' => 
+        array (
+            'Revolt\\' => 7,
+            'React\\Stream\\' => 13,
+            'React\\Socket\\' => 13,
+            'React\\Promise\\' => 14,
+            'React\\EventLoop\\' => 16,
+            'React\\Dns\\' => 10,
+            'React\\Cache\\' => 12,
+        ),
         'P' => 
         array (
             'Predis\\' => 7,
@@ -25,6 +36,10 @@ class ComposerStaticInitfa2d5f0e5aab4398021489a0d34c7ed5
         array (
             'Faj1\\Utils\\' => 11,
         ),
+        'E' => 
+        array (
+            'Evenement\\' => 10,
+        ),
         'D' => 
         array (
             'DeepCopy\\' => 9,
@@ -32,6 +47,34 @@ class ComposerStaticInitfa2d5f0e5aab4398021489a0d34c7ed5
     );
 
     public static $prefixDirsPsr4 = array (
+        'Revolt\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/revolt/event-loop/src',
+        ),
+        'React\\Stream\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/react/stream/src',
+        ),
+        'React\\Socket\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/react/socket/src',
+        ),
+        'React\\Promise\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/react/promise/src',
+        ),
+        'React\\EventLoop\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/react/event-loop/src',
+        ),
+        'React\\Dns\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/react/dns/src',
+        ),
+        'React\\Cache\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/react/cache/src',
+        ),
         'Predis\\' => 
         array (
             0 => __DIR__ . '/..' . '/predis/predis/src',
@@ -47,6 +90,10 @@ class ComposerStaticInitfa2d5f0e5aab4398021489a0d34c7ed5
         'Faj1\\Utils\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
+        ),
+        'Evenement\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/evenement/evenement/src',
         ),
         'DeepCopy\\' => 
         array (

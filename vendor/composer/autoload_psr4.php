@@ -6,9 +6,17 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Revolt\\' => array($vendorDir . '/revolt/event-loop/src'),
+    'React\\Stream\\' => array($vendorDir . '/react/stream/src'),
+    'React\\Socket\\' => array($vendorDir . '/react/socket/src'),
+    'React\\Promise\\' => array($vendorDir . '/react/promise/src'),
+    'React\\EventLoop\\' => array($vendorDir . '/react/event-loop/src'),
+    'React\\Dns\\' => array($vendorDir . '/react/dns/src'),
+    'React\\Cache\\' => array($vendorDir . '/react/cache/src'),
     'Predis\\' => array($vendorDir . '/predis/predis/src'),
     'PhpParser\\' => array($vendorDir . '/nikic/php-parser/lib/PhpParser'),
     'Godruoyi\\Snowflake\\' => array($vendorDir . '/godruoyi/php-snowflake/src'),
     'Faj1\\Utils\\' => array($baseDir . '/src'),
+    'Evenement\\' => array($vendorDir . '/evenement/evenement/src'),
     'DeepCopy\\' => array($vendorDir . '/myclabs/deep-copy/src/DeepCopy'),
 );
