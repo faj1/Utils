@@ -85,7 +85,13 @@ class RevoltUnixServer
                 fclose($newClient);
                 EventLoop::cancel($callbackId);
             } else {
-                call_user_func([$this->CallbackFunction, $data['method']], $data['params']);
+                try {
+                    if (method_exists($this->CallbackFunction, $data['method'])) {
+                        call_user_func([$this->CallbackFunction, $data['method']], $data['params']);
+                    }
+                }catch (\Throwable $Throwable){
+                    fwrite($client, SocketUtils::Packet(['code' => 1, 'msg' => $Throwable->getMessage(), 'data' => $data]));
+                }
                 // 发送响应回客户端
                 fwrite($client, SocketUtils::Packet(['code' => 0, 'msg' => 'OK', 'data' => $data]));
             }
