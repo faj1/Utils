@@ -6,7 +6,6 @@ use Faj1\Utils\SnowflakeUtils;
 use Faj1\Utils\Socket\RevoltUnixServer;
 use Faj1\Utils\Socket\UnixClient;
 use PHPUnit\Framework\TestCase;
-use React\Stream\WritableResourceStream;
 use function Swoole\Coroutine\run;
 
 class SnowflakeUtilsTest extends TestCase
@@ -37,29 +36,20 @@ class SnowflakeUtilsTest extends TestCase
         } else {
             echo "数组中没有重复值".PHP_EOL;
         }
-
         $this->assertTrue(true, 'Code executed successfully without exceptions.');
-
     }
 
 
     public function testSocket(){
-        \Swoole\Runtime::enableCoroutine($flags = SWOOLE_HOOK_ALL);
-        run(function () use (&$UnixClient) {
-            for ($i = 0; $i < 1000; $i++) {
-                $connector = new \React\Socket\Connector();
-                $connector->connect('unix:////tmp/p1hp-revolt-server.sock')->then(function (\React\Socket\ConnectionInterface $connection) {
-                    $connection->write('...');
-                    $connection->on('data', function ($chunk) use ($connection){
-                        var_dump($chunk);
-                        $connection->end();
-                    });
-                });
 
+        run(function () use (&$UnixClient) {
+            for ($i = 0; $i < 20000; $i++) {
+                go(function () {
+                    $UnixClient = new UnixClient();
+                    $UnixClient->send();
+                });
             }
         });
         $this->assertTrue(true, 'Code executed successfully without exceptions.');
-
-
     }
 }

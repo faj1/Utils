@@ -9,37 +9,32 @@ class UnixClient
 
     public function send()
     {
-        $socketPath = '/tmp/p1hp-revolt-server.sock'; // 与服务器端保持一致的套接字文件路径
+        $socketPath = '/tmp/php-revolt-server.sock'; // 与服务器端保持一致的套接字文件路径
         // 检查套接字文件是否存在
         if (!file_exists($socketPath)) {
-            echo "Error: Socket file {$socketPath} does not exist." . PHP_EOL;
-            exit(1);
+            throw new \Exception("Socket file {$socketPath} does not exist.");
         }
-        // 创建客户端套接字连接
+        $maxRetries = 40; // 最大重试次数
+        $retryDelay = 500000; // 每次重试的间隔时间（微秒）
+        $client = false;
+        for ($i = 0; $i < $maxRetries; $i++) {
+            $client = @stream_socket_client('unix://' . $socketPath, $errno, $errstr);
+            if ($client) {
+                break; // 如果连接成功，则跳出重试循环
+            }
+            usleep($retryDelay); // 延迟一定时间后再重试
+        }
         if (!$client) {
-            echo "Error: Unable to connect to the server: $errstr ($errno)" . PHP_EOL;
-
+            throw new \Exception("Error: Unable to connect to the server after $maxRetries attempts.");
         }
-        if ($client === false) {
-            echo "无法连接到服务器: $errstr ($errno)\n";
-            return; // 或者抛出异常
-        }
-
-
         // 准备发送的数据
         $data = json_encode([
             'params' => ['@bifa001', 'This is a test message.']
         ]);
-        $data = SocketUtils::Packet(['method'=>'sendMessage','params'=>['@bifa03','测试']]);
+        $data = SocketUtils::Packet(['method'=>'handle','params'=>'xxxxxxxxxx']);
         fwrite($client, $data);
-        //echo "Data sent to server successfully." . PHP_EOL;
-        // 接收服务器的响应（如果需要）
-        $response = @fread($client, 1024);
-        if ($response) {
-           // echo "Response from server: " . $response . PHP_EOL;
-        } else {
-//echo "No response received from server." . PHP_EOL;
-        }
+        $response = SocketUtils::UnixUnpack($client);
+        echo "Response from server: " . $response . PHP_EOL;
         // 关闭连接
         fclose($client);
     }

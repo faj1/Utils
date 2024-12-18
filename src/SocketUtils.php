@@ -47,6 +47,21 @@ class SocketUtils
 
 
 
+    public static function UnixUnpack($client)
+    {
+        $header = @fread($client, 4);
+        if(strlen($header) != 4) {
+            return [];
+        }
+        $dataLength = unpack('N', $header)[1];
+        echo "消息总长度:。{$dataLength}\n";
+        $body = @fread($client, $dataLength);
+        $data = gzuncompress($body);
+        echo "消息内容::。{$data}\n";
+        return json_decode($data, true);
+    }
+
+
 
 
 
