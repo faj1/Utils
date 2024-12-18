@@ -31,7 +31,7 @@ class UnixClient
         $data = SocketUtils::Packet($MessageData);
         fwrite($client, $data);
         $response = SocketUtils::UnixUnpack($client);
-        echo "Response from server: " . $response . PHP_EOL;
+        echo 'response:'.json_encode($response)."\n";
         // 关闭连接
         fclose($client);
     }
