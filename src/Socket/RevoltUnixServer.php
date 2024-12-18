@@ -2,7 +2,6 @@
 
 namespace Faj1\Utils\Socket;
 
-use Faj1\Utils\RedisUtils;
 use Faj1\Utils\SocketUtils;
 use Revolt\EventLoop;
 
