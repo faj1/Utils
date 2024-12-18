@@ -7,9 +7,9 @@ use Faj1\Utils\SocketUtils;
 class UnixClient
 {
 
-    public function send()
+    public function send($socketPath = '/tmp/php-revolt-server.sock',$MessageData = ['method'=>'handle','params'=>'xxxxxxxxxx'])
     {
-        $socketPath = '/tmp/php-revolt-server.sock'; // 与服务器端保持一致的套接字文件路径
+
         // 检查套接字文件是否存在
         if (!file_exists($socketPath)) {
             throw new \Exception("Socket file {$socketPath} does not exist.");
@@ -27,11 +27,8 @@ class UnixClient
         if (!$client) {
             throw new \Exception("Error: Unable to connect to the server after $maxRetries attempts.");
         }
-        // 准备发送的数据
-        $data = json_encode([
-            'params' => ['@bifa001', 'This is a test message.']
-        ]);
-        $data = SocketUtils::Packet(['method'=>'handle','params'=>'xxxxxxxxxx']);
+
+        $data = SocketUtils::Packet($MessageData);
         fwrite($client, $data);
         $response = SocketUtils::UnixUnpack($client);
         echo "Response from server: " . $response . PHP_EOL;
