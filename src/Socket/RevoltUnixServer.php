@@ -3,6 +3,7 @@
 namespace Faj1\Utils\Socket;
 
 use Faj1\Utils\SocketUtils;
+use ReflectionMethod;
 use Revolt\EventLoop;
 
 class RevoltUnixServer
@@ -85,15 +86,22 @@ class RevoltUnixServer
                 fclose($newClient);
                 EventLoop::cancel($callbackId);
             } else {
+                $ReturnData = [];
                 try {
                     if (method_exists($this->CallbackFunction, $data['method'])) {
-                        call_user_func([$this->CallbackFunction, $data['method']], $data['params']);
+                        $reflectionMethodWithReturn = new ReflectionMethod($this->CallbackFunction,  $data['method']);
+                        $returnType = $reflectionMethodWithReturn->getReturnType();
+                        if($returnType){
+                            $ReturnData = call_user_func([$this->CallbackFunction, $data['method']], $data['params']);
+                        }else{
+                            call_user_func([$this->CallbackFunction, $data['method']], $data['params']);
+                        }
                     }
                 }catch (\Throwable $Throwable){
                     fwrite($client, SocketUtils::Packet(['code' => 1, 'msg' => $Throwable->getMessage(), 'data' => $data]));
                 }
                 // 发送响应回客户端
-                fwrite($client, SocketUtils::Packet(['code' => 0, 'msg' => 'OK', 'data' => $data]));
+                fwrite($client, SocketUtils::Packet(['code' => 0, 'msg' => 'OK', 'data' => $ReturnData]));
             }
         });
     }
