@@ -106,6 +106,31 @@ class ArrayUtils
 
 
 
+    public static function getChildren($data, $parentId, &$visited = []): array
+    {
+        // 检查当前节点是否已访问过
+        if (in_array($parentId, $visited)) {
+            return []; // 遇到循环依赖时停止递归
+        }
+        // 标记当前节点为已访问
+        $visited[] = $parentId;
+        $result = [];
+        foreach ($data as $item) {
+            if ($item['pid'] == $parentId) {
+                // 找到子节点，递归查找其子节点
+                $item['children'] = self::getChildren($data, $item['id'], $visited);
+                $result[] = $item;
+            }
+        }
+        // 移除当前节点的访问标记（如果不需要全局影响）
+        array_pop($visited);
+        return $result;
+    }
+
+
+
+
+
 
 
 
