@@ -104,9 +104,14 @@ class ArrayUtils
     }
 
 
-
-
-    public static function getChildren($data, $parentId, &$visited = []): array
+    /**
+     * 提供一个数组递归获取其子节点
+     * @param $data
+     * @param $parentId
+     * @param array $visited
+     * @return array
+     */
+    public static function getChildren($data, $parentId, array &$visited = []): array
     {
         // 检查当前节点是否已访问过
         if (in_array($parentId, $visited)) {
