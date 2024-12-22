@@ -49,12 +49,12 @@ class PDOConnectionPool
     public function getConnection(): PDO
     {
         if (!$this->pool->isEmpty()) {
-            echo '直接从池子取链接'.PHP_EOL;
+            //echo '直接从池子取链接'.PHP_EOL;
             return $this->pool->dequeue();
         }
         if ($this->currentConnections < $this->maxConnections) {
             $this->currentConnections++;
-            echo '链接不够用创建新链接'.PHP_EOL;
+            //echo '链接不够用创建新链接'.PHP_EOL;
             return new PDO($this->dsn, $this->username, $this->password, $this->options);
         }
         throw new Exception('Max connections reached'); // 达到最大连接数
