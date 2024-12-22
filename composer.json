@@ -20,7 +20,8 @@
       "ext-redis": "*",
         "revolt/event-loop": "^1.0",
         "react/event-loop": "^1.5.0",
-        "react/socket": "^1.16.0"
+        "react/socket": "^1.16.0",
+        "illuminate/database": "^11.36"
     },
     "require-dev": {
         "phpunit/phpunit": "^11.5"
