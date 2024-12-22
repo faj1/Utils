@@ -4,9 +4,10 @@ namespace Faj1\Utils\database_pool;
 
 use Illuminate\Database\Connection;
 use Illuminate\Database\MySqlConnection;
+use PDO;
 
 
-class PDO
+class MyPDO
 {
     private PDOConnectionPool $pool;
     private PDO $pdo;

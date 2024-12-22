@@ -52,4 +52,10 @@ class SnowflakeUtilsTest extends TestCase
         });
         $this->assertTrue(true, 'Code executed successfully without exceptions.');
     }
+
+    public function testDbPool(){
+
+    }
+
+
 }
