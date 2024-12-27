@@ -108,10 +108,11 @@ class ArrayUtils
      * 提供一个数组递归获取其子节点
      * @param $data
      * @param $parentId
+     * @param string $name
      * @param array $visited
      * @return array
      */
-    public static function getChildren($data, $parentId, array &$visited = []): array
+    public static function getChildren($data, $parentId, string $name = "pid", array &$visited = []): array
     {
         // 检查当前节点是否已访问过
         if (in_array($parentId, $visited)) {
@@ -121,9 +122,9 @@ class ArrayUtils
         $visited[] = $parentId;
         $result = [];
         foreach ($data as $item) {
-            if ($item['pid'] == $parentId) {
+            if ($item[$name] == $parentId) {
                 // 找到子节点，递归查找其子节点
-                $item['children'] = self::getChildren($data, $item['id'], $visited);
+                $item['children'] = self::getChildren($data, $item['id'],$name, $visited);
                 $result[] = $item;
             }
         }
