@@ -2,6 +2,7 @@
 
 namespace Faj1\Utils\Test;
 
+use Faj1\Utils\Blockchain\QuotesUtils;
 use Faj1\Utils\database_pool\MyPDO;
 use Faj1\Utils\SnowflakeUtils;
 use Faj1\Utils\Socket\RevoltUnixServer;
@@ -81,6 +82,14 @@ class SnowflakeUtilsTest extends TestCase
         });
 
          $this->assertTrue(true, 'Code executed successfully without exceptions.');
+    }
+
+
+    public function testGetQuotesInfo()
+    {
+        $QuotesUtils = new QuotesUtils();
+        $QuotesUtils->swooleGetQuotesInfo();
+        $this->assertTrue(true, 'Code executed successfully without exceptions.');
     }
 
 
