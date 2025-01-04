@@ -33,7 +33,6 @@ class QuotesUtils
             // 如果已经在协程环境中，直接处理
             $this->handleSymbolsInCoroutine($symbols, $Data);
         }
-        var_dump($Data);
         return $Data;
     }
 
