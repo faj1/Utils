@@ -62,7 +62,7 @@ class SnowflakeUtils
      * @param $max
      * @return float|int|mixed
      */
-    private  static  function generateRandomFloat($min = 0.0001, $max = 0.01) {
+    public  static  function generateRandomFloat($min = 0.0001, $max = 0.01) {
         return $min + mt_rand() / mt_getrandmax() * ($max - $min);
     }
 
