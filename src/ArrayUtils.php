@@ -136,6 +136,24 @@ class ArrayUtils
 
 
 
+    /**
+     * 根据给定的键数组移除第一个数组中的相同键
+     *
+     * @param array $array1 要进行移除操作的原始数组
+     * @param array $keys   包含需要移除键的数组
+     * @return array 返回移除指定键后的数组
+     */
+    public static function removeKeysFromArray(array $array1, array $keys): array {
+        // 遍历要移除的键数组，如果键存在于原始数组中，则移除
+        foreach ($keys as $key) {
+            if (array_key_exists($key, $array1)) {
+                unset($array1[$key]);
+            }
+        }
+        return $array1;
+    }
+
+
 
 
 
