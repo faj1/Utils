@@ -2,10 +2,10 @@
 
 namespace Faj1\Utils\Test;
 
+use Faj1\Utils\Blockchain\FiatCurrencyUtils;
 use Faj1\Utils\Blockchain\QuotesUtils;
 use Faj1\Utils\database_pool\MyPDO;
 use Faj1\Utils\SnowflakeUtils;
-use Faj1\Utils\Socket\RevoltUnixServer;
 use Faj1\Utils\Socket\UnixClient;
 use PHPUnit\Framework\TestCase;
 use function Swoole\Coroutine\run;
@@ -92,5 +92,15 @@ class SnowflakeUtilsTest extends TestCase
         $this->assertTrue(true, 'Code executed successfully without exceptions.');
     }
 
+
+
+    public function testFiatCurrencyUtils()
+    {
+        $FiatCurrencyUtils = new FiatCurrencyUtils();
+        $FiatCurrencyUtils->GetQuotesInfo();
+
+        $this->assertTrue(true, 'Code executed successfully without exceptions.');
+
+    }
 
 }
