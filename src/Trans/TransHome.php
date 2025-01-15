@@ -35,7 +35,7 @@ class TransHome
         $CurlHttpClient = new CurlHttpClient();
         $Value = $CurlHttpClient->post($Url,['keywords' => $keywords, 'sourceLanguage' => $sourceLanguage, 'targetLanguage' => $targetLanguage]);
         $Data = json_decode($Value, true);
-        if(!isset($Data["data"]['text']) and $number < $this->Retries) {
+        if(!isset($Data["data"]['Text']) and $number < $this->Retries) {
             usleep(80000);
             $number++;
             $this->translate($keywords, $sourceLanguage, $targetLanguage, $code, $number);
