@@ -58,11 +58,12 @@ class SnowflakeUtils
 
     /**
      * 随机小数方法
-     * @param $min
-     * @param $max
+     * @param float $min
+     * @param float $max
      * @return float|int|mixed
      */
-    public  static  function generateRandomFloat($min = 0.0001, $max = 0.01) {
+    public  static  function generateRandomFloat(float $min = 0.0001, float $max = 0.01): mixed
+    {
         return $min + mt_rand() / mt_getrandmax() * ($max - $min);
     }
 
