@@ -7,6 +7,7 @@ use Faj1\Utils\Blockchain\QuotesUtils;
 use Faj1\Utils\database_pool\MyPDO;
 use Faj1\Utils\SnowflakeUtils;
 use Faj1\Utils\Socket\UnixClient;
+use Faj1\Utils\Trans\TransHome;
 use PHPUnit\Framework\TestCase;
 use function Swoole\Coroutine\run;
 
@@ -97,10 +98,22 @@ class SnowflakeUtilsTest extends TestCase
     public function testFiatCurrencyUtils()
     {
         $FiatCurrencyUtils = new FiatCurrencyUtils();
-        $FiatCurrencyUtils->GetQuotesInfo();
+        $FiatCurrencyUtils->GetQuotesInfo(10,true);
 
         $this->assertTrue(true, 'Code executed successfully without exceptions.');
 
     }
+
+    public function testTransHome()
+    {
+        $TransHome = new TransHome();
+        $TransHome->translate('这是一条测试翻译消息','zh','en');
+
+
+        $this->assertTrue(true, 'Code executed successfully without exceptions.');
+
+    }
+
+
 
 }
