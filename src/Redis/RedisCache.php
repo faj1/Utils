@@ -51,6 +51,33 @@ class RedisCache {
         return $Value;
     }
 
+    /**
+     * 查询缓存并且闭包查询
+     * @param $key
+     * @param $queryCallback
+     * @param int $ttl
+     * @return false|mixed|string
+     */
+    public function fetchDataWithCache($key, $queryCallback, int $ttl = 3600)
+    {
+        $cachedData = $this->get($key);
+        if($cachedData){
+            return $cachedData;
+        }
+        $data = $queryCallback();
+        if ($data) {
+            // 3. 将数据写入缓存
+            if(is_array($data)) {
+                $data  = json_encode($data);
+            }
+            $this->set($key, $data, $ttl);
+        }
+        // 4. 返回查询结果
+        return $data;
+    }
+
+
+
     public function delete($key) {
         return $this->redis->del($key);
     }
