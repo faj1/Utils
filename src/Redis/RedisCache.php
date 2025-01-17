@@ -70,6 +70,9 @@ class RedisCache {
             if(is_array($data)) {
                 $data  = json_encode($data);
             }
+            if(is_object($data)) {
+                $data  = json_encode($data);
+            }
             $this->set($key, $data, $ttl);
         }
         // 4. 返回查询结果
