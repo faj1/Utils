@@ -132,7 +132,23 @@ class RedisCache {
     }
 
 
-
+    public function redis_queue_send($queue, $data, $delay = 0) {
+        $queue_waiting = '{redis-queue}-waiting';
+        $queue_delay = '{redis-queue}-delayed';
+        $now = time();
+        $package_str = json_encode([
+            'id'       => rand(),
+            'time'     => $now,
+            'delay'    => $delay,
+            'attempts' => 0,
+            'queue'    => $queue,
+            'data'     => $data
+        ]);
+        if ($delay) {
+            return $this->redis->zAdd($queue_delay, $now + $delay, $package_str);
+        }
+        return $this->redis->lPush($queue_waiting.$queue, $package_str);
+    }
 
 
 
