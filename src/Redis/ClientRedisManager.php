@@ -54,28 +54,27 @@ class ClientRedisManager
     {
         $uidSetKey = "clients:worker:$this->workerId";
         $clientUids = $this->redis->sMembers($uidSetKey);
-
-        if (!empty($clientUids)) {
-            // 使用管道批量操作提升性能
-            $pipe = $this->redis->pipeline();
-            foreach ($clientUids as $uid) {
-                // 1. 获取客户端类型用于索引删除
-                $clientType = $this->redis->hGet("clients:info:$uid", 'type');
-
-                // 2. 清理类型集合中的UID
-                if ($clientType) {
-                    $pipe->sRem("clients:type:$clientType", $uid);
-                }
-
-                // 3. 删除客户端信息本身
-                $pipe->del("clients:info:$uid");
-            }
-
-            // 4. 最后清除worker自身的uid集合
-            $pipe->del($uidSetKey);
-            $pipe->exec();
+        if (empty($clientUids)) {
+            return;
         }
+
+        // 获取数据后立刻删除集合，防止后续保存时重复添加
+        $this->redis->del($uidSetKey);  // 提前解除与worker的关联
+
+        // 后续清理步骤保持不变
+        $pipe = $this->redis->pipeline();
+        foreach ($clientUids as $uid) {
+            $clientType = $this->redis->hGet("clients:info:$uid", 'type');
+            // 如果该客户端已被其他worker接管则不会删除类型索引
+            $actualWorkerId = $this->redis->hGet("clients:info:$uid", 'worker_id');
+            if ($clientType && $actualWorkerId == $this->workerId) {
+                $pipe->sRem("clients:type:$clientType", $uid);
+            }
+            $pipe->del("clients:info:$uid");
+        }
+        $pipe->exec();
     }
+
 
     /**
      * 删除单个客户端（连接关闭时调用）
